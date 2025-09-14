@@ -200,14 +200,13 @@
 
         /* Profile image styling */
         .profile-img {
-            border: 4px solid transparent;
-            background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
-            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            width: 160px;
-            height: 160px;
-        }
+    border: 4px solid transparent;
+    border-radius: 50%; /* keeps it round */
+    background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+    width: 160px;
+    height: 160px;
+    object-fit: cover; /* makes sure image fits */
+}
         
         /* Increased content sizes */
         .content-lg {
@@ -458,3 +457,4 @@
 </body>
 
 </html>
+
