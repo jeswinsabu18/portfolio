@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeswin Sabu - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #06b6d4;
+            --dark: #0f172a;
+            --light: #f1f5f9;
+            --gray: #94a3b8;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1.2rem;
+            font-size: 2.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+            border-color: var(--primary);
+        }
+
+        .skill-pill {
+            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+        }
+
+        .skill-pill:hover {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Header animation */
+        @keyframes fadeInSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-header-item {
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.5rem;
+        }
+
+        /* Scroll-reveal animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .hidden-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .hidden-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glow effect */
+        .glow {
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Navigation active state */
+        .nav-item {
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Profile image styling */
+        .profile-img {
+            border: 4px solid transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            width: 160px;
+            height: 160px;
+        }
+        
+        /* Increased content sizes */
+        .content-lg {
+            font-size: 1.2rem;
+        }
+        
+        .content-xl {
+            font-size: 1.3rem;
+        }
+        
+        .icon-xl {
+            font-size: 2rem;
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+        }
+        
+        .education-title {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="gradient-bg">
+
+    <!-- Animated background elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full filter blur-3xl opacity-10 animate-pulse-slow"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-cyan-500 rounded-full filter blur-3xl opacity-10 animate-pulse-slow"></div>
+    </div>
+
+    <!-- Header and Navigation Bar -->
+    <header class="relative z-10 py-10">
+        <div class="container mx-auto px-6 md:px-10 flex flex-col md:flex-row items-center md:justify-between">
+            <div class="flex flex-col md:flex-row items-center text-center md:text-left">
+                <!-- Profile Image -->
+                <img class="rounded-full mb-6 md:mb-0 md:mr-8 shadow-xl profile-img floating" src="images/profile.jpg" alt="Jeswin Sabu's photo" style="animation-delay: 0s;">
+                <div class="animated-header-item" style="animation-delay: 0.2s;">
+                    <h1 class="text-5xl sm:text-6xl font-bold text-white mb-2 glow">Jeswin Sabu</h1>
+                    <p class="text-xl sm:text-2xl font-medium bg-gradient-to-r from-[#6366f1] to-[#06b6d4] bg-clip-text text-transparent">Final-year Computer Science Engineering Student</p>
+                    <div class="flex justify-center md:justify-start space-x-8 mt-6 animated-header-item" style="animation-delay: 0.4s;">
+                        <a href="https://linkedin.com/in/jeswinsabu" target="_blank" class="text-gray-300 hover:text-[#6366f1] transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-linkedin-in icon-xl"></i>
+                        </a>
+                        <a href="https://github.com/jeswinsabu18" target="_blank" class="text-gray-300 hover:text-[#6366f1] transition-all duration-300 transform hover:scale-110">
+                            <i class="fab fa-github icon-xl"></i>
+                        </a>
+                        <a href="mailto:jeswinsabu04@gmail.com" class="text-gray-300 hover:text-[#6366f1] transition-all duration-300 transform hover:scale-110">
+                            <i class="fas fa-envelope icon-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="mt-10 md:mt-0 animated-header-item" style="animation-delay: 0.6s;">
+                <ul class="flex flex-wrap justify-center md:justify-end space-x-6 md:space-x-10 font-medium">
+                    <li><a href="#summary" class="nav-item text-gray-300 hover:text-white transition duration-300">Summary</a></li>
+                    <li><a href="#skills" class="nav-item text-gray-300 hover:text-white transition duration-300">Skills</a></li>
+                    <li><a href="#projects" class="nav-item text-gray-300 hover:text-white transition duration-300">Projects</a></li>
+                    <li><a href="#education" class="nav-item text-gray-300 hover:text-white transition duration-300">Education</a></li>
+                    <li><a href="#certifications" class="nav-item text-gray-300 hover:text-white transition duration-300">Certifications</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-10 mt-16 relative z-10">
+
+        <!-- Summary Section -->
+        <section id="summary" class="card-hover p-10 rounded-2xl mb-16 hidden-section">
+            <h2 class="text-3xl font-bold text-center section-title mb-8 text-white">Summary</h2>
+            <p class="text-center text-gray-300 leading-relaxed content-xl">
+                Final-year Computer Science Engineering student with a strong foundation in C, Python, and SQL. Passionate about software development, especially in AI-integrated applications and quality assurance. Known for being dedicated, focused, and punctual, with excellent teamwork and time management skills. Eager to begin my career as a Test Engineer, but as a fresher, I am passionate about gaining experience in any role that helps me grow and contribute effectively in the software industry.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="card-hover p-10 rounded-2xl mb-16 hidden-section">
+            <h2 class="text-3xl font-bold text-center section-title mb-10 text-white">Skills</h2>
+            <div class="flex flex-wrap justify-center gap-5">
+                <span class="skill-pill text-white">Python</span>
+                <span class="skill-pill text-white">C</span>
+                <span class="skill-pill text-white">Git</span>
+                <span class="skill-pill text-white">MySQL</span>
+                <span class="skill-pill text-white">Time Management</span>
+                <span class="skill-pill text-white">Teamwork</span>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-16 hidden-section">
+            <h2 class="text-3xl font-bold text-center section-title mb-10 text-white">Projects</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Project 1: HEALTHIFY -->
+                <div class="card-hover p-10 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-purple-500 rounded-bl-full opacity-10"></div>
+                    <h3 class="project-title font-semibold mb-4 bg-gradient-to-r from-[#6366f1] to-[#06b6d4] bg-clip-text text-transparent">HEALTHIFY - Online Health Management Platform</h3>
+                    <p class="text-gray-400 text-lg mb-6">Jan 2025 - Apr 2025</p>
+                    <ul class="list-none space-y-4 text-gray-300 content-lg">
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Developed a fully frontend JavaScript web application to analyze blood test reports and generate personalized health insights without requiring user authentication.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Leveraged PDF.js for in-browser blood report parsing and integrated Google's Gemini API to provide AI-driven diet and exercise recommendations.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Designed a dynamic progress tracking system that updates automatically with each new report entry.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Emphasized performance and simplicity by implementing the app entirely in vanilla JavaScript, HTML, and CSS for seamless deployment.</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pulse inline-block rounded-lg bg-gradient-to-r from-[#6366f1] to-[#06b6d4] text-white font-medium">
+                        View Project
+                    </div>
+                </div>
+
+                <!-- Project 2: To-Do List -->
+                <div class="card-hover p-10 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-cyan-500 rounded-bl-full opacity-10"></div>
+                    <h3 class="project-title font-semibold mb-4 bg-gradient-to-r from-[#6366f1] to-[#06b6d4] bg-clip-text text-transparent">To-Do List - Task Management Web App</h3>
+                    <p class="text-gray-400 text-lg mb-6">Dec 2024</p>
+                    <ul class="list-none space-y-4 text-gray-300 content-lg">
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Built a simple and responsive to-do list application to help users manage daily tasks efficiently.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Implemented features such as add, edit, delete, and mark tasks as complete, with persistent data storage using local storage.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Developed using HTML, CSS, and JavaScript with a focus on clean UI/UX design.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[#6366f1] mr-3 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span>Encouraged productivity and task organization through a minimalistic and intuitive interface.</span>
+                        </li>
+                    </ul>
+                    <div class="mt-8 pulse inline-block rounded-lg bg-gradient-to-r from-[#6366f1] to-[#06b6d4] text-white font-medium">
+                        View Project
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="card-hover p-10 rounded-2xl mb-16 hidden-section">
+            <h2 class="text-3xl font-bold text-center section-title mb-10 text-white">Education</h2>
+            <div class="space-y-10">
+                <!-- B.Tech -->
+                <div class="text-center relative overflow-hidden p-8 rounded-xl bg-slate-800/50">
+                    <div class="absolute -left-12 -top-12 w-32 h-32 bg-purple-500 rounded-full opacity-10"></div>
+                    <h3 class="education-title font-semibold bg-gradient-to-r from-[#6366f1] to-[#06b6d4] bg-clip-text text-transparent">Bachelor of Technology in Computer Science and Engineering</h3>
+                    <p class="text-gray-300 text-lg">St. Joseph's College of Engineering and Technology, Palai, Kerala</p>
+                    <p class="text-gray-400 mt-3">Expected Graduation: June 2026 | CGPA: 9.13/10</p>
+                </div>
+                <!-- Higher Secondary -->
+                <div class="text-center relative overflow-hidden p-8 rounded-xl bg-slate-800/50">
+                    <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-cyan-500 rounded-full opacity-10"></div>
+                    <h3 class="education-title font-semibold bg-gradient-to-r from-[#6366f1] to-[#06b6d4] bg-clip-text text-transparent">Higher Secondary Education (Class XII - Kerala State Board)</h3>
+                    <p class="text-gray-300 text-lg">St Mary's Higher Secondary School Bharanaganam, Kerala</p>
+                    <p class="text-gray-400 mt-3">Year of Completion: 2022 | Percentage: 96.6%</p>
+                </div>
+                <!-- High School -->
+                <div class="text-center relative overflow-hidden p-8 rounded-xl bg-slate-800/50">
+                    <div class="absolute -left-12 -bottom-12 w-32 h-32 bg-purple-500 rounded-full opacity-10"></div>
+                    <h3 class="education-title font-semibold bg-gradient-to-r from-[#6366f1] to-[#06b6d4] bg-clip-text text-transparent">High School Education (Class X - ICSE)</h3>
+                    <p class="text-gray-300 text-lg">Alphonsa Residential School Bharanaganam, Kerala</p>
+                    <p class="text-gray-400 mt-3">Year of Completion: 2020 | Percentage: 90%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="card-hover p-10 rounded-2xl mb-16 hidden-section">
+            <h2 class="text-3xl font-bold text-center section-title mb-10 text-white">Certifications</h2>
+            <div class="max-w-2xl mx-auto space-y-8">
+                <div class="flex items-start p-6 rounded-xl bg-slate-800/50 hover:bg-slate-800/70 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-[#6366f1] to-[#06b6d4] p-4 rounded-lg mr-6">
+                        <i class="fas fa-certificate text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white text-xl">Spoken Tutorial Certificate in C Programming</h3>
+                        <p class="text-gray-400 text-lg">Conducted by IIT Bombay (April 2024)</p>
+                    </div>
+                </div>
+                <div class="flex items-start p-6 rounded-xl bg-slate-800/50 hover:bg-slate-800/70 transition-all duration-300">
+                    <div class="bg-gradient-to-r from-[#6366f1] to-[#06b6d4] p-4 rounded-lg mr-6">
+                        <i class="fas fa-certificate text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white text-xl">IBM SkillsBuild: From Learner to Builder</h3>
+                        <p class="text-gray-400 text-lg">Become an AI Agent Architect (June 2025)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="relative z-10 py-10 mt-16 border-t border-slate-700">
+        <div class="container mx-auto text-center px-6 md:px-10">
+            <p class="text-gray-400 text-lg">&copy; 2024 Jeswin Sabu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll(".hidden-section");
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: "0px",
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Add click handler for project buttons
+            document.querySelectorAll('.pulse').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.add('animate-ping');
+                    setTimeout(() => {
+                        this.classList.remove('animate-ping');
+                    }, 500);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
